@@ -1,0 +1,85 @@
+{
+  "name": "quote-switcher",
+  "displayName": "Quote Switcher",
+  "description": "Cycle string quotes without changing the string value.",
+  "version": "0.0.1",
+  "packageManager": "pnpm@12.1.0",
+  "publisher": "gvastethecreator",
+  "author": {
+    "name": "gvastethecreator"
+  },
+  "license": "MIT",
+  "icon": "media/icon.png",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gvastethecreator/quote-switcher.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gvastethecreator/quote-switcher/issues"
+  },
+  "homepage": "https://github.com/gvastethecreator/quote-switcher#readme",
+  "keywords": [
+    "quotes",
+    "strings",
+    "javascript",
+    "typescript",
+    "json"
+  ],
+  "engines": {
+    "vscode": "^1.134.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "capabilities": {
+    "virtualWorkspaces": {
+      "supported": true
+    },
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "quoteSwitcher.cycleQuotes",
+        "title": "Cycle Quotes",
+        "category": "Quote Switcher"
+      },
+      {
+        "command": "quoteSwitcher.convertToSingle",
+        "title": "Convert to Single Quotes",
+        "category": "Quote Switcher"
+      },
+      {
+        "command": "quoteSwitcher.convertToDouble",
+        "title": "Convert to Double Quotes",
+        "category": "Quote Switcher"
+      },
+      {
+        "command": "quoteSwitcher.convertToTemplate",
+        "title": "Convert to Template Literal",
+        "category": "Quote Switcher"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run package",
+    "compile": "tsc --noEmit && node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "package": "tsc --noEmit && node esbuild.js --production",
+    "vsix": "pnpm run package && vsce package --no-dependencies",
+    "check-types": "tsc --noEmit",
+    "test": "node --test --experimental-strip-types src/**/*.test.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.0",
+    "@types/vscode": "^1.134.0",
+    "@vscode/vsce": "^3.9.2",
+    "esbuild": "^0.28.2",
+    "typescript": "^7.0.2"
+  }
+}
