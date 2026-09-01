@@ -14,12 +14,12 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/gvastethecreator/quote-switcher.git"
+    "url": "https://github.com/gvastethecreator/vscode-quote-switcher.git"
   },
   "bugs": {
-    "url": "https://github.com/gvastethecreator/quote-switcher/issues"
+    "url": "https://github.com/gvastethecreator/vscode-quote-switcher/issues"
   },
-  "homepage": "https://github.com/gvastethecreator/quote-switcher#readme",
+  "homepage": "https://github.com/gvastethecreator/vscode-quote-switcher#readme",
   "keywords": [
     "quotes",
     "strings",

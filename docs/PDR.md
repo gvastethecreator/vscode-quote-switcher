@@ -1,5 +1,5 @@
-Repo: `X:\vscode-extensions\quote-switcher`
-Remote: private (`gvastethecreator/quote-switcher`)
+Repo: `X:\vscode-extensions\vscode-quote-switcher`
+Remote: private (`gvastethecreator/vscode-quote-switcher`)
 
 # PDR — Quote Switcher
 
