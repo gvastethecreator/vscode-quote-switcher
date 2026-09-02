@@ -1,11 +1,12 @@
 import * as vscode from "vscode";
-import { COMMANDS } from "./commands.ts";
+import { COMMAND_ACTIONS } from "./commands.ts";
+import { runQuoteCommand } from "./editor.ts";
 
 export function activate(context: vscode.ExtensionContext): void {
-  for (const id of COMMANDS) {
+  for (const [id, action] of Object.entries(COMMAND_ACTIONS)) {
     context.subscriptions.push(
-      vscode.commands.registerCommand(id, () => {
-        void vscode.window.showErrorMessage("This command is not implemented yet.");
+      vscode.commands.registerCommand(id, (...args: unknown[]) => {
+        return runQuoteCommand(action, args);
       }),
     );
   }
