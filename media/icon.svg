@@ -1,4 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
-  <rect width="128" height="128" rx="24" fill="#b47814"/>
-  <text x="64" y="78" text-anchor="middle" fill="#f4f4f4" font-size="56" font-family="Georgia, serif">"</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <title>Quote Switcher</title>
+  <g stroke="#14243a" stroke-width="7" stroke-linejoin="round">
+    <path
+      fill="#3478d4"
+      d="M91 28C57 42 33 74 31 108c-2 31 17 51 44 51 25 0 41-17 41-41 0-22-15-37-36-37-3 0-6 0-9 1 7-15 19-26 35-34Z"
+    />
+    <g fill="#8057b8">
+      <path d="M151 126c-21 0-35 15-35 36 0 22 15 36 35 36 3 0 6 0 9-1-6 12-17 22-30 30l16 17c28-15 45-40 46-70 1-28-16-48-41-48Z" />
+      <path d="M199 126c-21 0-35 15-35 36 0 22 15 36 35 36 3 0 6 0 9-1-6 12-17 22-30 30l16 17c28-15 45-40 46-70 1-28-16-48-41-48Z" />
+    </g>
+    <g fill="#e5a62f">
+      <path d="M93 91h53V80l28 27-28 27v-11H93c-9 0-16-7-16-16s7-16 16-16Z" />
+      <path d="M163 133h-53v-11l-28 27 28 27v-11h53c9 0 16-7 16-16s-7-16-16-16Z" />
+    </g>
+  </g>
 </svg>

@@ -2,7 +2,7 @@
   "name": "quote-switcher",
   "displayName": "Quote Switcher",
   "description": "Cycle string quotes without changing the string value.",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "packageManager": "pnpm@12.1.0",
   "publisher": "gvastethecreator",
   "author": {
@@ -12,6 +12,11 @@
   "type": "module",
   "icon": "media/icon.png",
   "private": true,
+  "pricing": "Free",
+  "galleryBanner": {
+    "color": "#17191f",
+    "theme": "dark"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/gvastethecreator/vscode-quote-switcher.git"
@@ -34,7 +39,22 @@
     "Other"
   ],
   "activationEvents": [],
-  "main": "./dist/extension.js",
+  "main": "./dist/node/extension.cjs",
+  "browser": "./dist/web/extension.cjs",
+  "extensionKind": [
+    "ui",
+    "workspace"
+  ],
+  "files": [
+    "dist/node/extension.cjs",
+    "dist/web/extension.cjs",
+    "media/icon.png",
+    "media/preview.png",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md",
+    "SECURITY.md"
+  ],
   "capabilities": {
     "virtualWorkspaces": {
       "supported": true
@@ -48,39 +68,132 @@
       {
         "command": "quoteSwitcher.cycleQuotes",
         "title": "Cycle Quotes",
-        "category": "Quote Switcher"
+        "category": "Quote Switcher",
+        "enablement": "editorLangId == javascript || editorLangId == typescript || editorLangId == json || editorLangId == jsonc"
       },
       {
         "command": "quoteSwitcher.convertToSingle",
         "title": "Convert to Single Quotes",
-        "category": "Quote Switcher"
+        "category": "Quote Switcher",
+        "enablement": "editorLangId == javascript || editorLangId == typescript"
       },
       {
         "command": "quoteSwitcher.convertToDouble",
         "title": "Convert to Double Quotes",
-        "category": "Quote Switcher"
+        "category": "Quote Switcher",
+        "enablement": "editorLangId == javascript || editorLangId == typescript || editorLangId == json || editorLangId == jsonc"
       },
       {
         "command": "quoteSwitcher.convertToTemplate",
         "title": "Convert to Template Literal",
-        "category": "Quote Switcher"
+        "category": "Quote Switcher",
+        "enablement": "editorLangId == javascript || editorLangId == typescript"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Quote Switcher",
+      "properties": {
+        "quoteSwitcher.javascript.order": {
+          "type": "array",
+          "default": [
+            "single",
+            "double",
+            "template"
+          ],
+          "minItems": 1,
+          "maxItems": 12,
+          "uniqueItems": true,
+          "scope": "resource",
+          "items": {
+            "type": "string",
+            "enum": [
+              "single",
+              "double",
+              "template"
+            ]
+          },
+          "description": "Quote order used by Cycle Quotes in JavaScript files."
+        },
+        "quoteSwitcher.typescript.order": {
+          "type": "array",
+          "default": [
+            "single",
+            "double",
+            "template"
+          ],
+          "minItems": 1,
+          "maxItems": 12,
+          "uniqueItems": true,
+          "scope": "resource",
+          "items": {
+            "type": "string",
+            "enum": [
+              "single",
+              "double",
+              "template"
+            ]
+          },
+          "description": "Quote order used by Cycle Quotes in TypeScript files."
+        }
+      }
+    },
+    "menus": {
+      "editor/context": [
+        {
+          "command": "quoteSwitcher.cycleQuotes",
+          "when": "editorTextFocus && (editorLangId == javascript || editorLangId == typescript || editorLangId == json || editorLangId == jsonc)",
+          "group": "1_modification@50"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "quoteSwitcher.cycleQuotes",
+          "when": "editorLangId == javascript || editorLangId == typescript || editorLangId == json || editorLangId == jsonc"
+        },
+        {
+          "command": "quoteSwitcher.convertToSingle",
+          "when": "editorLangId == javascript || editorLangId == typescript"
+        },
+        {
+          "command": "quoteSwitcher.convertToDouble",
+          "when": "editorLangId == javascript || editorLangId == typescript || editorLangId == json || editorLangId == jsonc"
+        },
+        {
+          "command": "quoteSwitcher.convertToTemplate",
+          "when": "editorLangId == javascript || editorLangId == typescript"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "pnpm run package",
     "compile": "tsc --noEmit && node esbuild.cjs",
     "watch": "node esbuild.cjs --watch",
     "package": "tsc --noEmit && node esbuild.cjs --production",
-    "vsix": "pnpm run package && vsce package --no-dependencies",
+    "vsix": "vsce package --no-dependencies --out quote-switcher.vsix",
+    "inspect:vsix": "node scripts/inspect-vsix.mjs quote-switcher.vsix",
+    "render:media": "node scripts/render-media.mjs",
+    "check:media": "node scripts/check-media.mjs",
     "check-types": "tsc --noEmit",
-    "test": "node --test --experimental-strip-types src/**/*.test.ts"
+    "test": "pnpm run test:unit",
+    "test:unit": "node --test --experimental-strip-types src/**/*.test.ts",
+    "test:performance": "node --experimental-strip-types scripts/performance.mjs",
+    "test:integration": "node test/integration/run.mjs",
+    "build:test-web": "node scripts/build-web-tests.mjs",
+    "test:web": "pnpm run build:test-web && node test/web/run.mjs",
+    "test:vsix": "node test/integration/run-vsix.mjs",
+    "quality": "pnpm run test:unit && pnpm run check-types && pnpm run compile && pnpm run test:performance && pnpm run check:media"
   },
   "devDependencies": {
     "@types/node": "^26.4.0",
     "@types/vscode": "^1.134.0",
+    "@types/yauzl": "3.4.0",
+    "@vscode/test-electron": "3.1.0",
+    "@vscode/test-web": "0.0.81",
     "@vscode/vsce": "^3.9.2",
     "esbuild": "^0.28.2",
-    "typescript": "^7.0.2"
+    "sharp": "^0.35.4",
+    "typescript": "^7.0.2",
+    "yauzl": "3.4.0"
   }
 }

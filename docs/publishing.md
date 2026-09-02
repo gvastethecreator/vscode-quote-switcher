@@ -2,20 +2,33 @@
 
 Extension id: `gvastethecreator.quote-switcher`.
 
-This repository starts private. Do not publish to the Marketplace until PDR v1 is done and the user asks.
+Publication is not part of ordinary implementation. It requires explicit authorization after the exact candidate commit, VSIX hash, listing text, target registries, tag, and release mutations are shown.
 
-## Package a VSIX (no token needed)
+## Build the candidate
 
 ```bash
+pnpm install --frozen-lockfile
+pnpm run quality
+pnpm run test:integration
+pnpm run test:web
 pnpm run vsix
+pnpm run inspect:vsix
+pnpm run test:vsix
 ```
 
-Output: `quote-switcher-<version>.vsix` (gitignored).
+The candidate is `quote-switcher.vsix`. `vsce` runs `vscode:prepublish`, so the packaged Node and web bundles are rebuilt from the checked source.
 
-## Browser upload
+## Required approval preview
 
-1. Open https://marketplace.visualstudio.com/manage
-2. Sign in with the Microsoft account that owns publisher `gvastethecreator`
-3. Choose **New extension** → **Visual Studio Code** → upload the VSIX
+Before publishing, record:
 
-`package.json` → `icon` must be PNG. Keep SVG sources out of the VSIX (see `.vscodeignore`).
+- source commit and clean-tree state;
+- SHA-256 and byte size of the frozen VSIX;
+- Marketplace and Open VSX listing copy;
+- target version, tag, and release notes;
+- exact commands and registries to mutate;
+- publisher/account readiness without exposing credentials.
+
+After approval, publish the frozen bytes without rebuilding. Install each public artifact in desktop and web environments, verify the advertised commands, then compare its hash or package contents with the candidate.
+
+Do not delete the release branch, create a tag, publish a release, or mutate a registry as a side effect of package verification.

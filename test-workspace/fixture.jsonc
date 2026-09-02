@@ -1,0 +1,4 @@
+{
+  // JSON with Comments still requires double-quoted strings.
+  "message": "hello"
+}
