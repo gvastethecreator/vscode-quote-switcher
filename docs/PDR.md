@@ -1,181 +1,198 @@
-Repo: `X:\vscode-extensions\vscode-quote-switcher`
-Remote: private (`gvastethecreator/vscode-quote-switcher`)
-
 # PDR — Quote Switcher
 
+Repo: `X:\vscode-extensions\vscode-quote-switcher`
+Remote: private (`gvastethecreator/vscode-quote-switcher`)
+Target release: `0.1.0`
+
 ## Status
-Scaffolded · Priority P1
+
+Release candidate implemented · Priority P1 · Publication requires separate authorization
+
+QSW-001 through QSW-022 are implemented in the product branch. QSW-023 covers registry publication, tag/release creation, public-install verification, and monitoring; it is not authorized by implementation approval.
 
 ## Product summary
 
-Quote Switcher cycles or normalizes string delimiters safely without changing the represented string value. It is intentionally small: one precise transformation, excellent edge-case handling, and language-aware behavior.
+Quote Switcher changes JavaScript, TypeScript, JSON, and JSONC string delimiters without changing the represented string value. It is intentionally quiet: native commands, one small context-menu entry, no webview, no status item, no formatter behavior, and no success notification.
 
-## Opportunity
+## Supported contract
 
-Toggle-quotes extensions have existed for years, but a modern implementation can be smaller, faster, web-compatible and far more explicit about escaping, language support and invalid contexts.
+| Language | Cycle | Single | Double | Template |
+| --- | --- | --- | --- | --- |
+| JavaScript | Configured order | Yes | Yes | Safe literals only |
+| TypeScript | Configured order | Yes | Yes | Safe literals only |
+| JSON | Explains double-quote requirement | No | Safe no-op/validation | No |
+| JSON with Comments | Explains double-quote requirement | No | Safe no-op/validation | No |
 
-Category reference:
-- https://github.com/BriteSnow/vscode-toggle-quotes
-
-## Core jobs
-
-- cycle the string under cursor between supported quote styles;
-- transform selected strings in one command;
-- preserve runtime/string content through correct escaping;
-- optionally normalize to a configured preferred style.
-
-## MVP languages
-
-Priority:
-
-1. JavaScript
-2. TypeScript
-3. JSX/TSX where a quoted string is unambiguous
-4. JSON/JSONC with double-quote constraints respected
-5. Python as a later MVP candidate only if parser/escaping behavior is solid.
-
-Do not advertise generic all-language support.
+JSX/TSX attributes, Python, arbitrary language modes, tagged templates, and templates with active substitutions are excluded from `0.1.0`.
 
 ## Commands
 
 - `Quote Switcher: Cycle Quotes`
 - `Quote Switcher: Convert to Single Quotes`
 - `Quote Switcher: Convert to Double Quotes`
-- `Quote Switcher: Convert to Template Literal` (JS/TS only)
+- `Quote Switcher: Convert to Template Literal`
 
-## Example
+Only Cycle Quotes appears in the editor context menu. Conversion commands stay in the Command Palette. No default keybinding is contributed.
 
-```js
-"hello 'world'"
+## Semantic invariant
+
+Every successful conversion must prove:
+
+```text
+decode(original literal) === decode(transformed literal)
 ```
 
-can become:
+The pipeline is:
 
-```js
-'hello \'world\''
-```
+1. scan the active document with the language adapter;
+2. resolve every cursor or selection to one literal;
+3. reject crossings, overlaps, ambiguity, malformed tokens, or unsafe constructs;
+4. decode the supported escape subset;
+5. encode for the requested delimiter;
+6. decode the generated literal and compare exact UTF-16 string values;
+7. apply all planned changes through one editor edit.
 
-and then:
+No command performs global character replacement.
 
-```js
-`hello 'world'`
-```
+## Targeting and editing
 
-The semantic string value must remain equivalent.
+- Cursor positions may sit on either delimiter or inside the literal.
+- Non-empty selections must stay within one literal.
+- Multiple cursors may target different literals.
+- Repeated cursors on one literal are deduplicated.
+- Nested or overlapping target ranges are rejected.
+- Any unsafe target cancels the entire command.
+- All replacements form one undo step.
+- Selection anchors and active positions are restored relative to the edited ranges.
+- Surrounding trivia, line endings, and unrelated source remain untouched.
 
-## Critical rules
+## Safe subset
 
-- locate actual string literals, not arbitrary quote characters in comments;
-- preserve value under escaping/unescaping;
-- never convert to template literal if interpolation semantics would change unexpectedly;
-- understand backticks and `${...}` in JavaScript/TypeScript;
-- JSON remains valid JSON: no single-quote conversion;
-- multiple selections apply independently and atomically.
+The release refuses transformations when semantics cannot be proved:
 
-## Parsing approach
+- unterminated or malformed literals;
+- tagged templates;
+- active `${...}` substitutions;
+- legacy octal and decimal escapes;
+- unknown/identity escapes;
+- line continuations;
+- ambiguous unterminated regex contexts;
+- selections crossing token boundaries;
+- template conversion of directive-like string statements;
+- active documents larger than 8 MiB;
+- more than 100,000 located literals or 4,096 cursors/selections.
 
-Use a small language adapter abstraction. Prefer token/syntax information available from lightweight parsers or carefully bounded scanners. Avoid pulling an entire compiler when a robust literal scanner is sufficient.
-
-Transform pipeline:
-
-1. identify literal range and current delimiter;
-2. decode only delimiter-relevant escapes under language rules;
-3. encode for target delimiter;
-4. validate resulting literal constraints;
-5. return edit or safe no-op/error.
-
-Keep transform code pure.
+Comments and regex literals are scanned but never returned as quote targets. JSON and JSONC always remain double quoted.
 
 ## Configuration
-
-Possible settings:
 
 ```json
 {
   "quoteSwitcher.javascript.order": ["single", "double", "template"],
-  "quoteSwitcher.typescript.order": ["single", "double", "template"],
-  "quoteSwitcher.json.order": ["double"]
+  "quoteSwitcher.typescript.order": ["single", "double", "template"]
 }
 ```
 
-Avoid formatting settings already owned by Prettier/ESLint. This is an explicit editor command, not a save-time formatter.
+Each resource-scoped array is capped at 12 entries. Runtime validation ignores unsupported values, removes duplicates while preserving order, and falls back to the default when no valid entry remains. Cycle skips a target that is unsafe for the selected literal.
 
-## Non-goals
+## Architecture
 
-- formatter replacement;
-- linting quote style;
-- format-on-save;
-- rewriting entire files;
-- converting JSX attributes unless semantics are proven;
-- manipulating regex literals.
+```text
+src/
+├─ extension.ts          command registration
+├─ commands.ts           command ids and typed actions
+├─ editor.ts             VS Code adapter, feedback, atomic edits
+└─ core/
+   ├─ model.ts           immutable domain and rejection types
+   ├─ scanner.ts         bounded JS/TS/JSON/JSONC lexical scanner
+   ├─ decode.ts          manual JS decoder and strict JSON decoder
+   ├─ encode.ts          delimiter-aware semantic encoder
+   ├─ transform.ts       decode/encode/equality pipeline and cycle
+   ├─ targets.ts         cursor collection, dedupe, overlap, mapping
+   └─ configuration.ts   bounded quote-order normalization
+```
 
-## VS Code APIs
+The pure core has no `vscode`, Node, DOM, network, filesystem, or process import. Node and browser Extension Host bundles are emitted separately. There are no production npm dependencies.
 
-- active text editor/document;
-- selections/ranges;
-- editor/workspace edits;
-- commands and keybindings;
-- configuration.
-
-## Compatibility
-
-| Environment | Goal |
-| --- | --- |
-| Desktop | Full |
-| Web | Full |
-| Virtual Workspace | Full |
-| Restricted Mode | Full |
-| Remote | Full |
-
-No filesystem or Node dependency should be required.
-
-## Testing
-
-High-value fixture classes:
-
-- escaped delimiter;
-- escaped backslash before delimiter;
-- unicode escapes;
-- multiline/template literals;
-- `${}` template interpolation;
-- strings inside comments;
-- quotes inside regex;
-- JSX attributes;
-- empty string;
-- multiple cursors;
-- selection exactly/partially covering a literal;
-- invalid/incomplete string while typing;
-- CRLF/LF.
-
-Property-style test opportunity: decode original and transformed literal and assert equal semantic value for generated safe cases.
+The bounded scanner decision and conservative behavior are recorded in `docs/adr/0001-bounded-literal-scanner.md`.
 
 ## UX
 
-The extension should be nearly invisible:
+- successful commands are silent;
+- one concise warning is shown for a failed invocation, not one per cursor;
+- editor focus remains in place;
+- Cycle Quotes is the sole editor-context entry;
+- native Settings exposes two small quote-order arrays;
+- no webview, Tree View, status bar item, color-only state, or custom UI exists.
 
-- Command Palette commands;
-- optional default keybinding only if it avoids common VS Code conflicts;
-- editor context menu optional and scoped to relevant languages;
-- no status bar;
-- no webview;
-- no notifications on successful transformation.
+The README keeps the original quiet support/follow/stars footer.
 
-## Acceptance criteria
+## Security and privacy
 
-- transformations preserve represented value for supported cases;
-- JSON cannot be made syntactically invalid by unsupported quote conversion;
-- one undo restores all edits from one command;
-- unsupported/incomplete literals are safe no-ops with optional concise feedback;
-- no workspace scanning and near-zero idle cost;
-- web extension tests pass.
+- source text is processed in memory only after an explicit command;
+- no workspace scan, file write, storage, telemetry, logger, or network request;
+- no `eval`, dynamic code execution, shell, task, terminal, or workspace-controlled regex;
+- messages never include literal contents or paths;
+- command arguments and configuration are runtime-validated;
+- all targets are planned before mutation;
+- the package uses a strict files allowlist and is inspected as an archive.
 
-## Post-MVP
+See `docs/security-review.md`.
 
-- Python adapter;
-- PHP/Ruby/Rust adapters based on demand;
-- language-specific quote-order settings;
-- command to normalize selected literals only.
+## Compatibility
+
+| Environment | Target |
+| --- | --- |
+| Desktop local | Full |
+| VS Code Web | Full |
+| Virtual Workspace | Full |
+| Restricted Mode | Full |
+| Remote/WSL/SSH/Codespaces | Full |
+| Windows, Linux, macOS | Full |
+
+`extensionKind: ["ui", "workspace"]` allows the local UI host first while remaining remote-capable. The runtime does not depend on URI scheme or workspace trust.
+
+## Performance
+
+- lazy command activation;
+- zero idle scan, watcher, or status work;
+- linear active-document scan;
+- 8 MiB hard command boundary;
+- warmed 96 KiB scanner target under 20 ms;
+- 1 MiB stress target under 250 ms;
+- 5 MiB stress target under 1.2 seconds;
+- pathological comment/backslash target under 250 ms;
+- each minified runtime bundle below 250 KiB.
+
+The performance script prints measured values and fails the release gate on regression.
+
+## Verification contract
+
+- table-driven scanner, decoder, encoder, configuration, targeting, and mapping tests;
+- deterministic 1,000-value semantic property matrix across every delimiter pair;
+- desktop Extension Host command, multi-cursor, dedupe, undo, selection, config, malformed-input, JSON, and non-file URI coverage;
+- official VS Code web-host coverage in a writable virtual filesystem;
+- minimum/current/Insiders and Windows/Linux/macOS hosted matrix;
+- production Node/web bundle and performance checks;
+- deterministic icon and alpha checks;
+- strict VSIX content/security inspection;
+- clean-profile installed-VSIX command smoke.
+
+A real VS Code runtime screenshot is required for `media/preview.png`; generated UI mockups are forbidden.
+
+## Non-goals
+
+- formatter or linter replacement;
+- format-on-save or while-typing conversion;
+- whole-file/workspace rewrite;
+- regex conversion;
+- JSX/TSX attribute rewriting;
+- parser/compiler dependency;
+- code actions for every string;
+- telemetry or source analytics.
 
 ## Definition of done
 
-Pure transformation suite, integration tests, web-host verification, docs, Marketplace assets and publication pipeline complete.
+Implementation is complete when product source, hub/product PDRs, tests, Node/web bundles, CI, docs, transparent icon, real runtime preview, inspected VSIX, and clean-profile smoke agree with this contract.
+
+Publication remains incomplete until an explicitly approved frozen candidate is published and verified from public registries.

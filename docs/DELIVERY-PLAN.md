@@ -1,31 +1,28 @@
-# Quote Switcher — Complete delivery plan
+# Quote Switcher — Delivery record
 
-Status: execution specification  
+Status: QSW-001 through QSW-022 implemented; QSW-023 separately gated
 Repository: `gvastethecreator/vscode-quote-switcher`  
-Product phase: scaffold  
+Product phase: `0.1.0` release candidate
 Target release: `0.1.0`  
-Last reviewed: 2026-09-01
+Last reviewed: 2026-09-02
 
-This document turns `docs/PDR.md` into an ordered, testable implementation plan. It defines the behavior that must be preserved, the cases that must fail safely, and the tickets required before publication.
+This document began as the ordered implementation plan. The source, tests, docs, media pipeline, Node/web bundles, CI, package inspection, and installed-VSIX harness now implement its contract. `docs/PDR.md` is the final product contract. Registry publication, tag/release creation, public-install verification, and monitoring remain QSW-023 and require separate explicit authorization.
 
 ---
 
-## 1. Current state
+## 1. Implemented state
 
-The repository has a healthy common scaffold: strict TypeScript, esbuild, pnpm, CI, command contributions, Marketplace assets, a PDR, and agent/development documentation.
+- all four native commands use the semantic transformation pipeline;
+- bounded JS/TS/JSON/JSONC scanners exclude comments and regex literals;
+- manual escape decoding and delimiter-aware encoding enforce exact value equality;
+- multi-cursor targets are deduplicated, validated all-or-nothing, and applied in one undo step;
+- resource-scoped quote-order settings are bounded and runtime-validated;
+- separate Node and browser bundles activate in desktop and web hosts;
+- unit, deterministic property, performance, desktop, web, package, and clean-profile VSIX gates exist;
+- README, PDR, ADR, security review, compatibility notes, release procedure, icon provenance, and CI agree with the runtime;
+- the transparent icon follows the portfolio visual system; the preview is sourced from the real Extension Development Host.
 
-It does not yet implement Quote Switcher:
-
-- all four commands are registered through a placeholder handler;
-- invoking a command only reports that it is not implemented;
-- no literal locator, decoder, encoder, or language adapter exists;
-- the only test checks the test runner itself;
-- no Extension Host or browser-host test exists;
-- no `browser` entry exists despite the intended web support;
-- no packaged VSIX has been activated and exercised;
-- the manifest declares `"type": "module"`, while esbuild emits CommonJS to `dist/extension.js`.
-
-The first implementation milestone is therefore not “add another command.” It is to establish a correct semantic transformation core and a test harness capable of proving that represented string values do not change.
+There are no production dependencies, webviews, telemetry, network calls, filesystem calls, status items, or background scans.
 
 ---
 
@@ -74,7 +71,7 @@ For every selection/cursor:
 3. reject a selection that crosses literal boundaries;
 4. allow an exact literal selection or a cursor anywhere inside an unambiguous literal;
 5. deduplicate multiple cursors targeting the same literal;
-6. sort edits from the end of the document to avoid offset drift;
+6. sort edits by original source range and submit them in one batched editor edit;
 7. apply all valid edits atomically through one editor edit;
 8. if any targeted literal would make the operation unsafe, default to all-or-nothing for that command.
 
@@ -436,7 +433,14 @@ A lightweight property-testing dependency is acceptable only in devDependencies.
 
 ## 11. Ordered ticket backlog
 
-Use these identifiers in GitHub Issues, branches, and PR descriptions.
+Implementation status:
+
+| Tickets | Status |
+| --- | --- |
+| QSW-001–QSW-022 | Implemented in the release-candidate branch |
+| QSW-023 | Not executed; requires explicit publication authorization |
+
+The ticket descriptions below remain the acceptance record.
 
 ### Foundation
 
