@@ -5,11 +5,11 @@ import sharp from "sharp";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const media = path.join(root, "media");
-const svg = await readFile(path.join(media, "icon.svg"));
+const iconSource = path.join(media, "source", "quote-switcher-imagegen.png");
 
-await sharp(svg, { density: 384 })
+await sharp(iconSource)
   .ensureAlpha()
-  .resize(256, 256, { fit: "fill" })
+  .resize(256, 256, { fit: "contain" })
   .png()
   .toFile(path.join(media, "icon.png"));
 
