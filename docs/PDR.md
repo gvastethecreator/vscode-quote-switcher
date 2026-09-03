@@ -180,6 +180,10 @@ The performance script prints measured values and fails the release gate on regr
 
 A real VS Code runtime screenshot is required for `media/preview.png`; generated UI mockups are forbidden.
 
+## Assets
+
+`media/source/quote-switcher-imagegen.png` is the accepted native-alpha Imagegen source. `media/icon.png` is a direct 256×256 downsample of those pixels; no SVG reinterpretation remains. `media/preview.png` is the real multi-cursor VS Code runtime capture on a transparent 1200×800 canvas.
+
 ## Non-goals
 
 - formatter or linter replacement;

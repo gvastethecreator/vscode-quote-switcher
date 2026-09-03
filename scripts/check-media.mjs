@@ -6,18 +6,17 @@ import sharp from "sharp";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const media = path.join(root, "media");
-const svg = await readFile(path.join(media, "icon.svg"));
-const expectedIcon = await sharp(svg, { density: 384 })
+const expectedIcon = await sharp(path.join(media, "source", "quote-switcher-imagegen.png"))
   .ensureAlpha()
-  .resize(256, 256, { fit: "fill" })
+  .resize(256, 256, { fit: "contain" })
   .png()
   .toBuffer();
 const actualIcon = await readFile(path.join(media, "icon.png"));
-assert.deepEqual(actualIcon, expectedIcon, "media/icon.png is stale; run pnpm run render:media.");
+assert.deepEqual(actualIcon, expectedIcon, "media/icon.png is not a direct downsample of the accepted Imagegen source.");
 
 await verifyAlphaPng(path.join(media, "icon.png"), 256, 256, "Marketplace icon");
 await verifyAlphaPng(path.join(media, "preview.png"), 1200, 800, "Marketplace preview");
-console.log("Media checks passed: deterministic icon and transparent 1200x800 runtime preview.");
+console.log("Media checks passed: direct Imagegen icon and transparent 1200x800 runtime preview.");
 
 async function verifyAlphaPng(filename, expectedWidth, expectedHeight, label) {
   const image = sharp(filename);
