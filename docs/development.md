@@ -14,7 +14,7 @@ Quote Switcher uses pnpm 12, strict TypeScript, and two esbuild bundles. Product
 | `pnpm run test:performance` | Check scanner and bundle budgets |
 | `pnpm run test:integration` | Run commands in VS Code Desktop |
 | `pnpm run test:web` | Run commands in the VS Code web host and virtual filesystem |
-| `pnpm run render:media` | Render the deterministic SVG icon; optionally process a runtime preview |
+| `pnpm run render:media` | Render the accepted raster icon |
 | `pnpm run check:media` | Verify icon determinism, dimensions, and real alpha |
 | `pnpm run vsix` | Create `quote-switcher.vsix` |
 | `pnpm run inspect:vsix` | Inspect package contents and forbidden runtime surfaces |

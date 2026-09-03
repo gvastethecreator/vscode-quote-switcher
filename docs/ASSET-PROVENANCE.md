@@ -17,9 +17,8 @@ The accepted generated PNG is the production source. No SVG reinterpretation or 
 
 `media/preview.png` is not generated artwork or a UI mockup.
 
-- Source: VS Code 1.136 Extension Development Host on Windows, captured at runtime on 2026-09-02.
-- Flow: three real cursors targeted aligned TypeScript string literals, then `Quote Switcher: Cycle Quotes` ran from the native Command Palette.
-- Result: all three double-quoted literals became safe template literals in one edit; `${...}` became `\${...}` and backslash values were preserved.
-- Runtime proof: three editor cursors remained; no workbench page error was captured.
-- Final output: 1200 × 800 RGBA with a 20 px transparent perimeter and rounded transparent corners.
-- Production SHA-256: `04BF54BDFA4864C307DE3095A989A399967B1FFBB7CEF915726DB6CE874D7126`
+- Source: Quote Switcher 0.1.0 installed in stable VS Code 1.136.1 on Windows, captured at runtime on 2026-09-03.
+- Flow: three real selections targeted aligned TypeScript string literals, then `Quote Switcher: Convert to Single Quotes` ran from the native Command Palette.
+- Result: all three double-quoted literals became single-quoted literals in one edit while preserving their values.
+- Runtime proof: the real before and after editors remain visible side by side.
+- Final output: a tightly cropped RGBA before-and-after editor image with a transparent perimeter and rounded transparent corners.

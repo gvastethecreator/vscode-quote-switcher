@@ -24,7 +24,7 @@ const message = `hello 'world'`;
 const message = 'hello \'world\'';
 ```
 
-<img src="media/preview.png" alt="Quote Switcher cycling multiple JavaScript string literals in VS Code" width="100%" />
+<img src="media/preview.png" alt="Quote Switcher before and after converting three TypeScript strings" width="100%" />
 
 ## Commands
 

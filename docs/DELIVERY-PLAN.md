@@ -20,7 +20,7 @@ This document began as the ordered implementation plan. The source, tests, docs,
 - separate Node and browser bundles activate in desktop and web hosts;
 - unit, deterministic property, performance, desktop, web, package, and clean-profile VSIX gates exist;
 - README, PDR, ADR, security review, compatibility notes, release procedure, icon provenance, and CI agree with the runtime;
-- the transparent icon follows the portfolio visual system; the preview is sourced from the real Extension Development Host.
+- the transparent icon follows the portfolio visual system; the preview is sourced from Quote Switcher installed in stable VS Code.
 
 There are no production dependencies, webviews, telemetry, network calls, filesystem calls, status items, or background scans.
 

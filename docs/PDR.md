@@ -1,7 +1,7 @@
 # PDR — Quote Switcher
 
-Repo: `X:\vscode-extensions\vscode-quote-switcher`
-Remote: private (`gvastethecreator/vscode-quote-switcher`)
+Repo: `https://github.com/gvastethecreator/vscode-quote-switcher`
+Remote: public (`gvastethecreator/vscode-quote-switcher`)
 Target release: `0.1.0`
 
 ## Status
@@ -182,7 +182,7 @@ A real VS Code runtime screenshot is required for `media/preview.png`; generated
 
 ## Assets
 
-`media/source/quote-switcher-imagegen.png` is the accepted native-alpha Imagegen source. `media/icon.png` is a direct 256×256 downsample of those pixels; no SVG reinterpretation remains. `media/preview.png` is the real multi-cursor VS Code runtime capture on a transparent 1200×800 canvas.
+`media/source/quote-switcher-imagegen.png` is the accepted native-alpha Imagegen source. `media/icon.png` is a direct 256×256 downsample of those pixels; no SVG reinterpretation remains. `media/preview.png` is the real installed-extension before-and-after editor capture, tightly cropped around the converted strings with a transparent outer edge.
 
 ## Non-goals
 

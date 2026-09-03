@@ -32,21 +32,21 @@ This record covers the local release candidate. Hosted CI, pull-request merge, t
 | TypeScript | `tsc --noEmit` passed |
 | Node/web production bundles | 16,250 bytes / 16,208 bytes |
 | Scanner performance | 96 KiB 0.72 ms; 1 MiB 4.91 ms; 5 MiB 22.94 ms; pathological 6.05 ms |
-| Media | deterministic icon and native-alpha 1200 × 800 preview passed |
+| Media | deterministic icon and tightly cropped native-alpha preview passed |
 | Desktop stable | VS Code `1.136.0` Extension Host passed |
 | Minimum desktop | VS Code `1.134.0` Extension Host passed |
 | Web host | writable virtual-workspace suite passed |
 | VSIX inspection | 11 entries passed |
 | Installed VSIX | clean-profile install and Extension Host suite passed |
-| Product/hub PDR | byte-identical SHA-256 `8AD26CAEC415CA5452BCD3A0C890ADFB78E7BA0063027D2C71064C9FF5664981` |
+| Product/hub PDR | byte-identical SHA-256 `D0AE5091EAFEFC6D08DAA0F3CC7767AF77A675AD6E50C5E52B0816467CE10087` |
 
 ## Frozen artifacts
 
 | Artifact | Bytes | SHA-256 |
 | --- | ---: | --- |
-| `quote-switcher.vsix` | 210,729 | `65151A8DCDC7628320423BEF6344C2473CE67BA7B6D4F55DF581FEFA6D645E9D` |
-| `media/icon.png` | 9,271 | `E33CA2340B5D5D30C137CF66ACAF3874B31C277D41A6EFEA280DCA631C2A195A` |
-| `media/preview.png` | 196,445 | `04BF54BDFA4864C307DE3095A989A399967B1FFBB7CEF915726DB6CE874D7126` |
+| `quote-switcher.vsix` | 85,274 | `34CCE2BA93DBF0B9F2CF4016512B138B98BC75F6F3CA6E1C57C95FAABD39429F` |
+| `media/icon.png` | 41,219 | `6BC23434FF500EEF63600FD962ECC4D767AB6276998E2525F3B4CA9FAA3B7615` |
+| `media/preview.png` | 28,055 | `A2DD3651E534D136E802BE68B1E4383225B28B190C34F9A04BB03001D2D95704` |
 
 ## Remaining merge gates
 
