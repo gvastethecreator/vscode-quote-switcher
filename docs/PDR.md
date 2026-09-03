@@ -182,7 +182,7 @@ A real VS Code runtime screenshot is required for `media/preview.png`; generated
 
 ## Assets
 
-`media/source/quote-switcher-imagegen.png` is the accepted native-alpha Imagegen source. `media/icon.png` is a direct 256×256 downsample of those pixels; no SVG reinterpretation remains. `media/preview.png` is the real installed-extension before-and-after editor capture, tightly cropped around the converted strings with a transparent outer edge.
+`media/source/quote-switcher-imagegen-raw.png` retains the generated concept. `media/source/quote-switcher-imagegen.png` is the accepted crisp vectorized-3D native-alpha raster normalized to a thin transparent safety margin. `media/icon.png` is a direct 256×256 downsample of those pixels; no SVG reinterpretation remains. `media/preview.png` is the real installed-extension before-and-after editor capture, tightly cropped around the converted strings with a transparent outer edge.
 
 ## Non-goals
 

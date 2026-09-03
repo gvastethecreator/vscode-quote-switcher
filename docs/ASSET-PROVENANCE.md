@@ -4,12 +4,13 @@
 
 - Provider: OpenAI ImageGen
 - Generated: 2026-09-02
-- Source: `media/source/quote-switcher-imagegen.png`
-- Source SHA-256: `128FECB0DAF093399F9CD50E25EF684084C1CD44D0EC1534BE4E63C5E04F8AAF`
+- Generation id: `exec-317dcd10-bc09-4da4-b6a6-6972ab75b8b8`
+- Raw source: `media/source/quote-switcher-imagegen-raw.png`, SHA-256 `19F3C10DB63BA9F9A8ADDA868126A3ED3F3FBCBED6F2AF69F4FE0ACB8941A8F7`
+- Production source: `media/source/quote-switcher-imagegen.png`, normalized to a thin transparent safety margin without redrawing the generated art; SHA-256 `3D184F4475BF7BEA344AACA96637645681E90140C5DD13254FF6F28F2D99ACEA`
 - Production output: `media/icon.png`, downsampled directly from the accepted Imagegen PNG at 256 × 256 with alpha preserved
-- Production SHA-256: `6BC23434FF500EEF63600FD962ECC4D767AB6276998E2525F3B4CA9FAA3B7615`
+- Production SHA-256: `749884AF5CFE8D92DDA00264C9ACD0D2E6148B5AB5CE6446B3A48722FF632174`
 
-Direction: one blue quote form and one violet quote form connected by an amber swap cue. Near-flat, restrained pseudo-Fluent depth, no container, no glow, and a transparent background.
+Direction: aligned graphite and violet quote forms inside two thick curved orange and coral swap arrows. Crisp vectorized 3D, no France blue, emerald, plastic, container, glow, or background.
 
 The accepted generated PNG is the production source. No SVG reinterpretation or alternate vector master remains. The source is excluded from the VSIX; the Marketplace consumes `media/icon.png`.
 
