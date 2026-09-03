@@ -3,7 +3,7 @@
 
 # Quote Switcher
 
-**Change quote style without changing the represented string value**
+**Change quote style without changing the represented string value.**
 
 <p align="center">
   <a href="https://github.com/gvastethecreator/vscode-quote-switcher"><img alt="GitHub" src="https://shieldcn.dev/badge/github.png?variant=outline&size=xs&theme=blue&logo=github" /></a>
@@ -12,57 +12,22 @@
 </p>
 </div>
 
----
-
-Place one or more cursors inside string literals, then run **Quote Switcher: Cycle Quotes**. All selected literals change in one edit and one undo step.
-
-```js
-const message = "hello 'world'";
-// Cycle Quotes →
-const message = `hello 'world'`;
-// Cycle Quotes →
-const message = 'hello \'world\'';
-```
-
 <img src="media/preview.png" alt="Quote Switcher before and after converting three TypeScript strings" width="100%" />
 
-## Commands
+## Highlights
 
-- **Cycle Quotes** — use the configured order for JavaScript or TypeScript.
-- **Convert to Single Quotes** — JavaScript and TypeScript.
-- **Convert to Double Quotes** — JavaScript, TypeScript, JSON, and JSON with Comments.
-- **Convert to Template Literal** — safe JavaScript and TypeScript literals only.
+- Cycle single, double, and template quotes in JavaScript and TypeScript.
+- Convert JSON and JSONC strings safely to double quotes.
+- Handle multiple cursors in one edit and one undo step.
+- Preserve the decoded string value or leave the source unchanged.
 
-Only **Cycle Quotes** appears in the editor context menu. All commands remain available from the Command Palette. No keybinding is claimed by default.
+## Use
 
-## Safety
+Place cursors inside string literals, then run **Quote Switcher: Cycle Quotes**. Direct conversion commands are also available from the Command Palette.
 
-Quote Switcher scans the active document only. It ignores comments and regex literals, validates escapes, verifies the decoded value after every conversion, deduplicates repeated cursors, and applies multi-cursor edits atomically.
+The extension ignores comments, regex literals, unsafe templates, malformed strings, and selections that cross literal boundaries. It has no telemetry, network access, filesystem access, or stored document content.
 
-It leaves source unchanged when safety cannot be proven, including:
-
-- incomplete or malformed literals;
-- tagged templates or templates with active `${...}` substitutions;
-- legacy octal, identity, or line-continuation escapes;
-- selections crossing literal boundaries;
-- directive-like strings when a template conversion could change directive behavior.
-
-JSON and JSONC strings always remain double quoted. JSX/TSX, Python, and arbitrary languages are not advertised in `0.1.0`.
-
-## Quote order
-
-```json
-{
-  "quoteSwitcher.javascript.order": ["single", "double", "template"],
-  "quoteSwitcher.typescript.order": ["single", "double", "template"]
-}
-```
-
-Duplicate or unsupported entries are ignored. An empty or invalid order falls back to the default.
-
-## Compatibility and privacy
-
-Desktop, web, virtual, restricted, and remote workspaces use the same browser-safe core. The extension has no runtime dependency, filesystem access, network request, telemetry, source logging, or stored document content.
+More details: [product contract](docs/PDR.md) · [compatibility](docs/compatibility.md) · [security](docs/security-review.md)
 
 ---
 
