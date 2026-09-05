@@ -2,6 +2,7 @@
 
 ## 0.1.0 — Unreleased
 
+- Added a Set Defaults command that writes factory settings to user and workspace scope.
 - Added semantic quote conversion for JavaScript, TypeScript, JSON, and JSON with Comments.
 - Added cycle, single, double, and safe template-literal commands with atomic multi-cursor editing and selection restoration.
 - Added bounded literal scanning that excludes comments and regex literals and rejects ambiguous source.

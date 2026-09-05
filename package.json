@@ -88,6 +88,11 @@
         "title": "Convert to Template Literal",
         "category": "Quote Switcher",
         "enablement": "editorLangId == javascript || editorLangId == typescript"
+      },
+      {
+        "command": "quoteSwitcher.setDefaults",
+        "title": "Set Defaults",
+        "category": "Quote Switcher"
       }
     ],
     "configuration": {
@@ -161,6 +166,9 @@
         {
           "command": "quoteSwitcher.convertToTemplate",
           "when": "editorLangId == javascript || editorLangId == typescript"
+        },
+        {
+          "command": "quoteSwitcher.setDefaults"
         }
       ]
     }
@@ -192,6 +200,7 @@
     "@vscode/test-web": "0.0.81",
     "@vscode/vsce": "^3.9.2",
     "esbuild": "^0.28.2",
+    "ovsx": "1.1.1",
     "playwright": "1.62.1",
     "sharp": "^0.35.4",
     "typescript": "^7.0.2",
