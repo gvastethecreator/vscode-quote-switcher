@@ -1,0 +1,376 @@
+{
+  "generated_at": "2026-09-05T04:45:27Z",
+  "generated_from_commit": "8c07334ac044ffd6170b5851acdaf90714c1c3b4",
+  "scope": [
+    "."
+  ],
+  "nodes": [
+    {
+      "id": "esbuild",
+      "path": "esbuild.cjs",
+      "type": "interface",
+      "boundary": "Esbuild",
+      "entrypoints": [
+        "esbuild.cjs:main"
+      ],
+      "tests": [],
+      "callers": [
+        {
+          "id": "repository",
+          "type": "calls"
+        }
+      ],
+      "callees": [
+        {
+          "id": "external-dependencies",
+          "type": "imports"
+        }
+      ],
+      "evidence": {
+        "status": "verified",
+        "locations": [
+          {
+            "path": "esbuild.cjs",
+            "symbol": "main"
+          }
+        ]
+      }
+    },
+    {
+      "id": "external-dependencies",
+      "path": "esbuild.cjs",
+      "type": "external",
+      "boundary": "External",
+      "entrypoints": [
+        "esbuild.cjs:esbuild"
+      ],
+      "tests": [],
+      "callers": [
+        {
+          "id": "esbuild",
+          "type": "imports"
+        },
+        {
+          "id": "scripts",
+          "type": "imports"
+        },
+        {
+          "id": "src",
+          "type": "imports"
+        },
+        {
+          "id": "src-core",
+          "type": "imports"
+        }
+      ],
+      "callees": [],
+      "evidence": {
+        "status": "verified",
+        "locations": [
+          {
+            "path": "esbuild.cjs",
+            "symbol": "esbuild"
+          }
+        ]
+      }
+    },
+    {
+      "id": "repository",
+      "path": "package.json",
+      "type": "module",
+      "boundary": "Repository",
+      "entrypoints": [
+        "package.json:{"
+      ],
+      "tests": [],
+      "callers": [],
+      "callees": [
+        {
+          "id": "esbuild",
+          "type": "calls"
+        },
+        {
+          "id": "scripts",
+          "type": "calls"
+        }
+      ],
+      "evidence": {
+        "status": "verified",
+        "locations": [
+          {
+            "path": "package.json",
+            "symbol": "{"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scripts",
+      "path": "scripts",
+      "type": "service",
+      "boundary": "Scripts",
+      "entrypoints": [
+        "scripts/build-web-tests.mjs:root"
+      ],
+      "tests": [],
+      "callers": [
+        {
+          "id": "repository",
+          "type": "calls"
+        }
+      ],
+      "callees": [
+        {
+          "id": "external-dependencies",
+          "type": "imports"
+        },
+        {
+          "id": "src-core",
+          "type": "imports"
+        }
+      ],
+      "evidence": {
+        "status": "verified",
+        "locations": [
+          {
+            "path": "scripts/build-web-tests.mjs",
+            "symbol": "root"
+          }
+        ]
+      }
+    },
+    {
+      "id": "src",
+      "path": "src",
+      "type": "module",
+      "boundary": "Src",
+      "entrypoints": [
+        "src/commands.ts:QuoteCommand"
+      ],
+      "tests": [],
+      "callers": [],
+      "callees": [
+        {
+          "id": "external-dependencies",
+          "type": "imports"
+        },
+        {
+          "id": "src-core",
+          "type": "imports"
+        }
+      ],
+      "evidence": {
+        "status": "verified",
+        "locations": [
+          {
+            "path": "src/commands.ts",
+            "symbol": "QuoteCommand"
+          }
+        ]
+      }
+    },
+    {
+      "id": "src-core",
+      "path": "src/core",
+      "type": "service",
+      "boundary": "Src",
+      "entrypoints": [
+        "src/core/configuration.ts:normalizeQuoteOrder"
+      ],
+      "tests": [
+        "src/core/scanner.test.ts",
+        "src/core/targets.test.ts",
+        "src/core/transform.test.ts"
+      ],
+      "callers": [
+        {
+          "id": "scripts",
+          "type": "imports"
+        },
+        {
+          "id": "src",
+          "type": "imports"
+        }
+      ],
+      "callees": [
+        {
+          "id": "external-dependencies",
+          "type": "imports"
+        }
+      ],
+      "evidence": {
+        "status": "verified",
+        "locations": [
+          {
+            "path": "src/core/configuration.ts",
+            "symbol": "normalizeQuoteOrder"
+          }
+        ]
+      }
+    },
+    {
+      "id": "test-workspace",
+      "path": "test-workspace",
+      "type": "module",
+      "boundary": "Test Workspace",
+      "entrypoints": [
+        "test-workspace/fixture.ts:greeting"
+      ],
+      "tests": [],
+      "callers": [],
+      "callees": [],
+      "evidence": {
+        "status": "verified",
+        "locations": [
+          {
+            "path": "test-workspace/fixture.ts",
+            "symbol": "greeting"
+          }
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "esbuild",
+      "to": "external-dependencies",
+      "type": "imports",
+      "evidence": {
+        "status": "verified",
+        "locations": [
+          {
+            "path": "esbuild.cjs",
+            "symbol": "esbuild"
+          }
+        ]
+      }
+    },
+    {
+      "from": "repository",
+      "to": "esbuild",
+      "type": "calls",
+      "evidence": {
+        "status": "verified",
+        "locations": [
+          {
+            "path": "package.json",
+            "symbol": "esbuild.cjs"
+          }
+        ]
+      }
+    },
+    {
+      "from": "repository",
+      "to": "scripts",
+      "type": "calls",
+      "evidence": {
+        "status": "verified",
+        "locations": [
+          {
+            "path": "package.json",
+            "symbol": "scripts/inspect-vsix.mjs"
+          },
+          {
+            "path": "package.json",
+            "symbol": "scripts/render-media.mjs"
+          },
+          {
+            "path": "package.json",
+            "symbol": "scripts/check-media.mjs"
+          }
+        ]
+      }
+    },
+    {
+      "from": "scripts",
+      "to": "external-dependencies",
+      "type": "imports",
+      "evidence": {
+        "status": "verified",
+        "locations": [
+          {
+            "path": "scripts/build-web-tests.mjs",
+            "symbol": "esbuild"
+          },
+          {
+            "path": "scripts/check-media.mjs",
+            "symbol": "sharp"
+          },
+          {
+            "path": "scripts/inspect-vsix.mjs",
+            "symbol": "yauzl"
+          }
+        ]
+      }
+    },
+    {
+      "from": "scripts",
+      "to": "src-core",
+      "type": "imports",
+      "evidence": {
+        "status": "verified",
+        "locations": [
+          {
+            "path": "scripts/performance.mjs",
+            "symbol": "../src/core/scanner.ts"
+          }
+        ]
+      }
+    },
+    {
+      "from": "src",
+      "to": "external-dependencies",
+      "type": "imports",
+      "evidence": {
+        "status": "verified",
+        "locations": [
+          {
+            "path": "src/editor.ts",
+            "symbol": "vscode"
+          },
+          {
+            "path": "src/extension.ts",
+            "symbol": "vscode"
+          }
+        ]
+      }
+    },
+    {
+      "from": "src",
+      "to": "src-core",
+      "type": "imports",
+      "evidence": {
+        "status": "verified",
+        "locations": [
+          {
+            "path": "src/commands.ts",
+            "symbol": "./core/model.ts"
+          },
+          {
+            "path": "src/editor.ts",
+            "symbol": "./core/configuration.ts"
+          },
+          {
+            "path": "src/editor.ts",
+            "symbol": "./core/model.ts"
+          }
+        ]
+      }
+    },
+    {
+      "from": "src-core",
+      "to": "external-dependencies",
+      "type": "imports",
+      "evidence": {
+        "status": "verified",
+        "locations": [
+          {
+            "path": "src/core/scanner.test.ts",
+            "symbol": "module"
+          }
+        ]
+      }
+    }
+  ],
+  "flows": []
+}
