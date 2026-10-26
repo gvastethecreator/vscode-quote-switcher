@@ -1,7 +1,7 @@
 # Code map: vscode-quote-switcher
 
-Generated: 2026-10-26T04:43:31Z | Commit: `800dbc10f767` | Schema: 2
-Generation: `f990781f05ef3f2250cff5aa5b9cda04529a412599d05df21740a5d7b2770875`
+Generated: 2026-10-26T07:24:27Z | Commit: `594e5823ba5c` | Schema: 2
+Generation: `c1b6375f6edc4e01a78a526cadd8ed9510b1e8ae3df97e28aba0a220fbaecef1`
 Scope: . | Inventory: working-tree
 Nodes: 47 | Edges: 121 | Flows: 0
 
@@ -9,7 +9,7 @@ Nodes: 47 | Edges: 121 | Flows: 0
 
 - Analysis: **partial**; 29 analyzed of 31 included files.
 - Configuration files: 1; omitted untracked files: 0.
-- Unresolved references and analysis limits: 175.
+- Unresolved references and analysis limits: 176.
 - Static references and call paths do not prove runtime execution or test coverage.
 
 ## Modules

@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
-  "source_commit": "800dbc10f76739b8e5c105e2530cdbc04a851a8e",
+  "source_commit": "594e5823ba5c22502b0bc651edfc1e71e82d9736",
   "working_tree_dirty": true,
-  "generated_at": "2026-10-26T04:43:31Z",
-  "generation_id": "f990781f05ef3f2250cff5aa5b9cda04529a412599d05df21740a5d7b2770875",
+  "generated_at": "2026-10-26T07:24:27Z",
+  "generation_id": "c1b6375f6edc4e01a78a526cadd8ed9510b1e8ae3df97e28aba0a220fbaecef1",
   "analysis": {
     "version": "syntax-1",
     "digest": "aac5588c813568478eb34b9cb090e19685ad183efe6d8b3496f261834a7c0f44"
@@ -53,8 +53,8 @@
         "path": "package.json",
         "origin": "tracked",
         "state": "present",
-        "digest": "88c52f441854d2b47496aa751ee056dd6415f874b16f369574236c6fc9f564bc",
-        "size": 6711
+        "digest": "e18cdeecfb38f106e0f695107ff9edce0d6f2496b0cabc77a0d666a7a050b2e9",
+        "size": 6930
       },
       {
         "path": "scripts/build-web-tests.mjs",
@@ -74,8 +74,8 @@
         "path": "scripts/inspect-vsix.mjs",
         "origin": "tracked",
         "state": "present",
-        "digest": "bfd3b67f4f92bbeef8ff098aabff803ae38d5afc45722e2f91329bed036cd8d0",
-        "size": 8646
+        "digest": "07e885b571c20460943800ded217e8d8c709b64ecf216804a83545e9c3ea6dac",
+        "size": 8913
       },
       {
         "path": "scripts/performance.mjs",
@@ -260,12 +260,12 @@
         "size": 375
       }
     ],
-    "digest": "1b8391626b4a727a225977c6942fdfbf3bdcd206b01403d4ba132a7cc5074973"
+    "digest": "d9083d53a08690152af73fc955fce257a15d04198303fbec0f23e04a12c4a3bf"
   },
-  "source_digest": "bc01f7126ce0a23f388452c8d42f32f7a75e6e5c32c066dfcfc867f18fae5596",
+  "source_digest": "7b8d1b374e92a14a3ec228c7926b79269d2f929864ce6ba811ac85e122067cac",
   "artifact_hashes": {
-    "codemap.json": "a5dece89bbbcb4a5c564b64bc27ffcfc4b654272c5fc0f279a9816f8dbf8e20e",
-    "codemap.md": "9884ef53fbbfe7e8ee3be63d755aa17e4dbc468d300ae8e262616f54b9bf6cab",
-    "codemap.html": "dfeab48425f1ca40c22e8214006baef54e148fbc1d6e723df96865fc0dbf7b37"
+    "codemap.json": "dc1a7e393afc77b978339d4c40cad5748f59d26b1c4427d99d7a4ba6c5d44c04",
+    "codemap.md": "e5727f94ab6b59a0fc0e87e8db92834f7a128112aeb8dd7a53206189d8dd0c27",
+    "codemap.html": "a1c7f7abb85e76857403a8d85e1fb9805af10f3d8af0d00ba208afc761a2113e"
   }
 }
