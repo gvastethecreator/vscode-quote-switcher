@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "source_commit": "36ff49e1542833517ec1aa00b2e3dbae99fa8e81",
+  "source_commit": "800dbc10f76739b8e5c105e2530cdbc04a851a8e",
   "working_tree_dirty": true,
-  "generated_at": "2026-09-07T03:20:45Z",
-  "generation_id": "5414bb1f17bae8b37a7f90e7652e296c2a3d5832f0a8d1649621b845c3d58100",
+  "generated_at": "2026-10-26T04:43:31Z",
+  "generation_id": "f990781f05ef3f2250cff5aa5b9cda04529a412599d05df21740a5d7b2770875",
   "analysis": {
     "version": "syntax-1",
-    "digest": "3c79d1c345c40f78e72d86e76fcdb0c240c137eb03778015ce78f994b43e3ccf"
+    "digest": "aac5588c813568478eb34b9cb090e19685ad183efe6d8b3496f261834a7c0f44"
   },
   "inventory": {
     "policy": {
@@ -53,8 +53,8 @@
         "path": "package.json",
         "origin": "tracked",
         "state": "present",
-        "digest": "0d279de0916b5815c027fe38ce02e182394ac4054946804645e482ebdce96cef",
-        "size": 6735
+        "digest": "88c52f441854d2b47496aa751ee056dd6415f874b16f369574236c6fc9f564bc",
+        "size": 6711
       },
       {
         "path": "scripts/build-web-tests.mjs",
@@ -86,7 +86,7 @@
       },
       {
         "path": "scripts/release-artifact.mjs",
-        "origin": "untracked",
+        "origin": "tracked",
         "state": "present",
         "digest": "22d3b41f2b8372e224466db0a33ae9686e4b99ee8fa3b45e713a20207e51ea69",
         "size": 5219
@@ -116,8 +116,8 @@
         "path": "src/core/decode.ts",
         "origin": "tracked",
         "state": "present",
-        "digest": "9990398b0c23241c148a5704ea83d16f089c985a5dc65b97d0623398985b5ca7",
-        "size": 4187
+        "digest": "954963155d7181742d347bbf34efa0db95dce901cca27cd0b7f2017cd05619c9",
+        "size": 4275
       },
       {
         "path": "src/core/encode.ts",
@@ -130,8 +130,8 @@
         "path": "src/core/model.ts",
         "origin": "tracked",
         "state": "present",
-        "digest": "79973f12078d43f2098c85f4d04f08ca68d4d62cfc43220b2124f17e6b13f134",
-        "size": 2689
+        "digest": "68c8daf169d3319a10a18389238b9a62321faa4355d854cabd0f8414dc4d0621",
+        "size": 2850
       },
       {
         "path": "src/core/scanner.test.ts",
@@ -144,8 +144,8 @@
         "path": "src/core/scanner.ts",
         "origin": "tracked",
         "state": "present",
-        "digest": "89ee71156bdcdc573729b69efefdf473bdf277cdc208f264a25d2364218f5920",
-        "size": 16508
+        "digest": "75712b956ae7db870e2755064e2f574b246fb4301193db43c10b71fbe483f075",
+        "size": 18951
       },
       {
         "path": "src/core/targets.test.ts",
@@ -165,22 +165,22 @@
         "path": "src/core/transform.test.ts",
         "origin": "tracked",
         "state": "present",
-        "digest": "dd3657f547d7f7df2825d3383b14177b7b9290634fbce9f1281eddcd6dd51903",
-        "size": 5532
+        "digest": "bbcefe989fff5fa51339084a1c052bd404be48b896c0291d181d880d57bfb709",
+        "size": 6943
       },
       {
         "path": "src/core/transform.ts",
         "origin": "tracked",
         "state": "present",
-        "digest": "b850c8be38e4dfd23408d799933b478ab4600aa6bb272d8fe0c9f77fe9a6a3be",
-        "size": 2896
+        "digest": "a3a3042488095fbdb0f7354bddf98254a7fc2d2ad4680a96371b512cf4aa5a49",
+        "size": 3015
       },
       {
         "path": "src/editor.ts",
         "origin": "tracked",
         "state": "present",
-        "digest": "8180e95ed0cbd9f301fcfa679197ed41f10c27ad28cad13d2733297c3f1a2c7d",
-        "size": 6601
+        "digest": "951215b8305569c104512be3bee7f80eb08fc67507c698824955722c558c2fc9",
+        "size": 6681
       },
       {
         "path": "src/extension.ts",
@@ -191,7 +191,7 @@
       },
       {
         "path": "src/settingsActions.ts",
-        "origin": "untracked",
+        "origin": "tracked",
         "state": "present",
         "digest": "2d9238bfb5bac72260aefe2e61375e542b733efe4b0123de61798144ac6b8ab1",
         "size": 2810
@@ -260,12 +260,12 @@
         "size": 375
       }
     ],
-    "digest": "64f30c74104ba96b271eb5f1ecca654555cab8353b52d52c79dff4c5b10cd34f"
+    "digest": "1b8391626b4a727a225977c6942fdfbf3bdcd206b01403d4ba132a7cc5074973"
   },
-  "source_digest": "7a9b5ae253643533e60e6d6f94a6322a392d9f7f2495186c3ed0f66d4ea8c564",
+  "source_digest": "bc01f7126ce0a23f388452c8d42f32f7a75e6e5c32c066dfcfc867f18fae5596",
   "artifact_hashes": {
-    "codemap.json": "d773e5629c27c09aceaf0124980ce0e91ae7e572b82dee70964d013c6ee5d356",
-    "codemap.md": "91d981dbc123e9e100acbb70b6b0d230f556d4be3c93d38e2e6afb9724e1c126",
-    "codemap.html": "d09b2342865e2ff772ecb5c2631a1c90fb9b051464bc65fa7060e0eeb0509195"
+    "codemap.json": "a5dece89bbbcb4a5c564b64bc27ffcfc4b654272c5fc0f279a9816f8dbf8e20e",
+    "codemap.md": "9884ef53fbbfe7e8ee3be63d755aa17e4dbc468d300ae8e262616f54b9bf6cab",
+    "codemap.html": "dfeab48425f1ca40c22e8214006baef54e148fbc1d6e723df96865fc0dbf7b37"
   }
 }
